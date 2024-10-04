@@ -8,18 +8,17 @@ function searchCep() {
     var cepInsert = document.getElementById("Cep").value.replace("-", "");
     $.getJSON(`https://viacep.com.br/ws/${cepInsert}/json/`, (itens) => {
 
- 
-        var logradouro = itens.logradouro;
-        var bairro = itens.bairro;
-        var localidade = itens.localidade;
-        var uf = itens.uf;
-
-        console.log(logradouro);
-        console.log(bairro);
-        console.log(localidade);
-        console.log(uf);
-
+        
+    setCepInfo(itens);
+       
 
     });
     
 };
+
+function setCepInfo(itens) {
+    document.getElementById("address").value = itens.logradouro || " ";
+    document.getElementById("bairro").value = itens.bairro || " ";
+    document.getElementById("city").value = itens.localidade || " ";
+    document.getElementById("state").value = itens.uf || " ";
+}
